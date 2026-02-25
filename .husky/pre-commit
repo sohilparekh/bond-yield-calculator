@@ -1,0 +1,23 @@
+echo "🔧 Running pre-commit hooks..."
+
+# Format code
+echo "📝 Formatting code..."
+pnpm format
+
+# Lint code
+echo "🔍 Linting code..."
+pnpm lint
+
+# Type check
+echo "🔍 Type checking..."
+pnpm typecheck
+
+# Run tests
+echo "🧪 Running tests..."
+pnpm test
+
+# Build project
+echo "🏗️ Building project..."
+pnpm build
+
+echo "✅ Pre-commit hooks completed successfully!"
