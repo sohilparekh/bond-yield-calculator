@@ -20,6 +20,7 @@
     "@nestjs/core": "^11.1.11",
     "@nestjs/platform-express": "^11.1.11",
     "@repo/api": "workspace:*",
+    "@repo/ui": "workspace:*",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2",
     "escape-html": "^1.0.3"
@@ -44,5 +45,23 @@
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "5.5.4"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/entry.js",
+      "require": "./dist/entry.js"
+    },
+    "./types": {
+      "import": "./src/bond/dto/index.ts",
+      "require": "./src/bond/dto/index.ts"
+    },
+    "./types/*": {
+      "import": "./src/bond/dto/*",
+      "require": "./src/bond/dto/*"
+    },
+    "./*": {
+      "import": "./dist/*.js",
+      "require": "./dist/*.js"
+    }
   }
 }

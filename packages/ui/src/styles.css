@@ -1,0 +1,4 @@
+@import "tailwindcss" prefix(ui);
+
+/* This creates the dark: variant specifically for your prefix */
+@custom-variant dark (&:where(.dark, .dark *));

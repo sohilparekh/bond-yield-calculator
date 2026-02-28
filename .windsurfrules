@@ -1,0 +1,15 @@
+# Project Structure Rules
+
+## Directory Mapping
+- **Backend**: All server-side logic (controllers, services, entities) must live in `/api`.
+- **Frontend**: All client-side code and UI logic must live in `/web`.
+
+## Data Architecture
+- **Source of Truth**: The `/api` directory defines the Data Transfer Objects (DTOs) and Entities.
+- **Frontend Sync**: The `/web` directory must derive its types and interfaces from the definitions in `/api` to maintain a single source of truth.
+
+## UI Generation (Atomic Design)
+When creating UI in `/web`, follow this hierarchy:
+1. **Components**: Basic building blocks (atoms).
+2. **Molecules**: Combinations of components (e.g., SearchBar = Input + Button).
+3. **Types**: UI-specific types that map directly to `/api` entities.
