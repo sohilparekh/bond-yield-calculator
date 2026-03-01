@@ -21,7 +21,7 @@ describe('Card Component', () => {
     );
 
     const card = screen.getByText('Card content').parentElement;
-    expect(card).toHaveClass(/custom-card/);
+    expect(card).toHaveClass('custom-card');
   });
 
   it('applies dark mode classes', () => {
@@ -32,8 +32,8 @@ describe('Card Component', () => {
     );
 
     const card = screen.getByText('Card content').parentElement;
-    expect(card).toHaveClass(/dark:border-gray-800/);
-    expect(card).toHaveClass(/dark:bg-gray-800/);
+    expect(card).toHaveClass('ui:dark:border-gray-800');
+    expect(card).toHaveClass('ui:dark:bg-gray-800');
   });
 
   it('renders with title and description', () => {

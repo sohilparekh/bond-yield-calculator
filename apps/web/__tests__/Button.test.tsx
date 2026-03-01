@@ -6,7 +6,9 @@ describe('Button Component', () => {
   it('renders with default props', () => {
     render(<Button>Click me</Button>);
 
-    const button = screen.getByRole('button', { name: /click me/i });
+    const button = screen.getByRole<HTMLButtonElement>('button', {
+      name: /click me/i,
+    });
     expect(button).toBeInTheDocument();
     expect(button).toHaveTextContent('Click me');
   });
@@ -16,7 +18,7 @@ describe('Button Component', () => {
 
     const button = screen.getByRole('button', { name: /delete/i });
     expect(button).toBeInTheDocument();
-    expect(button).toHaveClass(/bg-destructive/);
+    expect(button).toHaveClass('ui:bg-destructive');
   });
 
   it('renders with custom size', () => {
@@ -24,7 +26,7 @@ describe('Button Component', () => {
 
     const button = screen.getByRole('button', { name: /large button/i });
     expect(button).toBeInTheDocument();
-    expect(button).toHaveClass(/h-11/);
+    expect(button).toHaveClass('ui:h-11');
   });
 
   it('handles click events', () => {
@@ -42,6 +44,6 @@ describe('Button Component', () => {
 
     const button = screen.getByRole('button', { name: /disabled button/i });
     expect(button).toBeDisabled();
-    expect(button).toHaveClass(/opacity-50/);
+    expect(button).toHaveClass('ui:disabled:opacity-50');
   });
 });

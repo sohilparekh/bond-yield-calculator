@@ -8,7 +8,7 @@ describe('Input Component', () => {
 
     const input = screen.getByPlaceholderText(/enter value/i);
     expect(input).toBeInTheDocument();
-    expect(input).toHaveClass(/flex/);
+    expect(input).toHaveClass('flex');
   });
 
   it('renders with custom type', () => {
@@ -34,13 +34,13 @@ describe('Input Component', () => {
 
     const input = screen.getByRole('textbox');
     expect(input).toBeDisabled();
-    expect(input).toHaveClass(/disabled/);
+    expect(input).toHaveClass('ui:disabled:cursor-not-allowed');
   });
 
   it('applies custom className', () => {
     render(<Input className="custom-class" />);
 
     const input = screen.getByRole('textbox');
-    expect(input).toHaveClass(/custom-class/);
+    expect(input).toHaveClass('custom-class');
   });
 });
