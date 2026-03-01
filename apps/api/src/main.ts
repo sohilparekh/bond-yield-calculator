@@ -7,7 +7,7 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       'http://localhost:3001', // Local development
-      'https://bond-yield-calculator-web.vercel.app/', // Production frontend
+      'https://bond-yield-calculator-web.vercel.app', // Production frontend
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
