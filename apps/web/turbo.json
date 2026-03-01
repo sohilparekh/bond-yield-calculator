@@ -5,6 +5,9 @@
     "tasks": {
         "build": {
             "dependsOn": [
+                "@repo/api#build",
+                "@repo/ui#build:styles",
+                "@repo/ui#build:components",
                 "^build"
             ],
             "outputs": [

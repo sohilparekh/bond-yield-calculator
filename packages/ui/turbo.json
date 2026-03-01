@@ -16,8 +16,7 @@
     },
     "dev": {
       "cache": false,
-      "persistent": true,
-      "with": ["dev:styles", "dev:components"]
+      "persistent": true
     },
     "lint": {
       "outputs": [],

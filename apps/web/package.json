@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@repo/ui": "workspace:*",
+    "@repo/api": "workspace:*",
     "next": "16.1.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -23,7 +24,6 @@
   },
   "devDependencies": {
     "@jest/globals": "^30.2.0",
-    "@repo/api": "workspace:*",
     "@repo/eslint-config": "workspace:*",
     "@repo/tailwind-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
