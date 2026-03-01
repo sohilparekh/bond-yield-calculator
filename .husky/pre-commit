@@ -21,3 +21,4 @@ echo "🏗️ Building project..."
 pnpm build
 
 echo "✅ Pre-commit hooks completed successfully!"
+git add .

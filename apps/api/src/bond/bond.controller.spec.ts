@@ -1,17 +1,19 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import { describe, it, beforeEach, expect } from '@jest/globals';
 import request from 'supertest';
-import { AppModule } from './../src/app.module';
 import { Server } from 'http';
+import { describe, beforeEach, afterEach, it, expect } from '@jest/globals';
+import { BondController } from './bond.controller';
+import { BondService } from './bond.service';
 
-describe('AppController (e2e)', () => {
+describe('BondController (e2e)', () => {
   let app: INestApplication;
   let server: Server;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      controllers: [BondController],
+      providers: [BondService],
     }).compile();
 
     app = moduleFixture.createNestApplication();
@@ -19,12 +21,12 @@ describe('AppController (e2e)', () => {
     server = app.getHttpServer() as Server;
   });
 
-  it('/ (GET)', () => {
-    return request(server).get('/').expect(200).expect('Hello World!');
+  afterEach(async () => {
+    await app.close();
   });
 
-  describe('Bond Routes (e2e)', () => {
-    it('POST /bond/calculate - should calculate bond yields correctly', async () => {
+  describe('POST /bond/calculate', () => {
+    it('should calculate bond yields and return 200', async () => {
       const bondData = {
         faceValue: 1000,
         annualCouponRate: 5,
@@ -50,14 +52,14 @@ describe('AppController (e2e)', () => {
       expect(typeof response.body.premiumOrDiscount).toBe('string');
       expect(Array.isArray(response.body.cashFlowSchedule)).toBe(true);
 
-      // Verify specific calculated values
+      // Verify specific values
       expect(response.body.currentYield).toBeCloseTo(5.263, 2);
       expect(response.body.yieldToMaturity).toBeCloseTo(5.669, 2);
       expect(response.body.totalInterestEarned).toBeCloseTo(500, 2);
       expect(response.body.premiumOrDiscount).toBe('discount');
     });
 
-    it('POST /bond/calculate - should return 400 for invalid face value', async () => {
+    it('should return 400 for invalid face value', async () => {
       const invalidData = {
         faceValue: -1000,
         annualCouponRate: 5,
@@ -75,7 +77,7 @@ describe('AppController (e2e)', () => {
       expect(response.body.message).toContain('Face value must be positive');
     });
 
-    it('POST /bond/calculate - should return 400 for missing required fields', async () => {
+    it('should return 400 for missing required fields', async () => {
       const incompleteData = {
         annualCouponRate: 5,
         marketPrice: 950,
@@ -94,7 +96,7 @@ describe('AppController (e2e)', () => {
       );
     });
 
-    it('POST /bond/calculate - should handle semi-annual coupon frequency', async () => {
+    it('should handle semi-annual coupon frequency', async () => {
       const semiAnnualData = {
         faceValue: 1000,
         annualCouponRate: 5,
@@ -119,8 +121,10 @@ describe('AppController (e2e)', () => {
         expect(response.body.cashFlowSchedule.length).toBe(20);
       }
     });
+  });
 
-    it('GET /bond/calculate - should return 404 for GET requests', async () => {
+  describe('GET /bond/calculate', () => {
+    it('should return 404 for GET requests', async () => {
       const response = await request(server).get('/bond/calculate').expect(404);
     });
   });

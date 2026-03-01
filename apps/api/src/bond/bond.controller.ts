@@ -4,6 +4,7 @@ import {
   Body,
   HttpException,
   HttpStatus,
+  HttpCode,
 } from '@nestjs/common';
 import { BondService } from './bond.service';
 import { BondInputDto, BondCalculationResultDto } from '@repo/api';
@@ -13,6 +14,7 @@ export class BondController {
   constructor(private readonly bondService: BondService) {}
 
   @Post('calculate')
+  @HttpCode(200)
   calculate(@Body() request: BondInputDto): BondCalculationResultDto {
     try {
       // Validate input

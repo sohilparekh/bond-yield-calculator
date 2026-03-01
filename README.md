@@ -1,124 +1,323 @@
-# Turborepo starter
+# Bond Yield Calculator
 
-This is a community-maintained example. If you experience a problem, please submit a pull request with a fix. GitHub Issues will be closed.
+A comprehensive bond yield calculation application with backend API and frontend interface built with NestJS and Next.js.
 
-## Using this example
+## 🏗️ Architecture
 
-Run the following command:
+### Backend (NestJS API)
 
-```bash
-npx create-turbo@latest -e with-nestjs
+- **Framework**: NestJS with TypeScript
+- **Port**: 3000
+- **Features**:
+  - Bond yield calculations (current yield, yield to maturity)
+  - Cash flow schedule generation
+  - Input validation and error handling
+  - CORS enabled for frontend integration
+
+### Frontend (Next.js)
+
+- **Framework**: Next.js 16 with TypeScript
+- **Port**: 3001
+- **Features**:
+  - Interactive bond calculator form
+  - Real-time calculation results
+  - Dark mode support
+  - Responsive design with Tailwind CSS
+
+### Shared Components
+
+- **UI Package**: Custom React component library with shadcn/ui compatibility
+- **Styling**: Tailwind CSS v4 with custom prefix system
+- **Theme**: Dark mode support with CSS variables
+
+## 📁 Folder Structure
+
+```
+bond-yield-calculator/
+├── apps/
+│   ├── api/                    # NestJS Backend
+│   │   ├── src/
+│   │   │   ├── bond/           # Bond calculation logic
+│   │   │   │   ├── bond.controller.ts
+│   │   │   │   ├── bond.service.ts
+│   │   │   │   ├── bond.module.ts
+│   │   │   │   ├── bond.controller.spec.ts
+│   │   │   │   └── bond.service.spec.ts
+│   │   │   ├── app.module.ts    # Main application module
+│   │   │   ├── app.controller.ts # Root controller
+│   │   │   ├── app.service.ts    # Root service
+│   │   │   └── main.ts         # Application bootstrap
+│   │   ├── test/
+│   │   │   ├── app.e2e-spec.ts     # E2E tests
+│   │   │   ├── jest-e2e.json       # Jest configuration
+│   │   │   └── setup.ts            # Test setup
+│   │   └── package.json
+│   └── web/                    # Next.js Frontend
+│       ├── app/
+│       │   ├── layout.tsx          # Root layout
+│       │   ├── page.tsx            # Main page
+│       │   ├── theme-toggle.tsx     # Dark mode toggle
+│       │   └── react-scan-provider.tsx # Performance monitoring
+│       ├── e2e/
+│       │   └── bond-calculation.spec.ts # E2E tests
+│       ├── playwright.config.ts      # Playwright configuration
+│       └── package.json
+└── packages/
+    ├── @repo/api/               # Shared API types
+    ├── @repo/eslint-config/       # ESLint configurations
+    ├── @repo/jest-config/         # Jest configurations
+    ├── @repo/tailwind-config/     # Tailwind CSS configuration
+    ├── @repo/typescript-config/   # TypeScript configurations
+    └── @repo/ui/                # Shared UI components
+        ├── src/
+        │   ├── components/        # Reusable components
+        │   │   ├── button.tsx
+        │   │   ├── input.tsx
+        │   │   ├── label.tsx
+        │   │   └── card.tsx
+        │   ├── molecules/         # Complex components
+        │   │   ├── bond-calculator-form.tsx
+        │   │   ├── bond-results.tsx
+        │   │   └── cash-flow-table.tsx
+        │   └── lib/
+        │       └── utils.ts         # Utility functions
+        └── package.json
 ```
 
-## What's inside?
+## 🚀 Getting Started
 
-This Turborepo includes the following packages & apps:
+### Prerequisites
 
-### Apps and Packages
+- Node.js 18+
+- pnpm package manager
+- Git
 
-```shell
-.
-├── apps
-│   ├── api                       # NestJS app (https://nestjs.com).
-│   └── web                       # Next.js app (https://nextjs.org).
-└── packages
-    ├── @repo/api                 # Shared `NestJS` resources.
-    ├── @repo/eslint-config       # `eslint` configurations (includes `prettier`)
-    ├── @repo/jest-config         # `jest` configurations
-    ├── @repo/typescript-config   # `tsconfig.json`s used throughout the monorepo
-    └── @repo/ui                  # Shareable stub React component library.
-```
-
-Each package and application are mostly written in [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This `Turborepo` has some additional tools already set for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type-safety
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-- [Jest](https://prettier.io) & [Playwright](https://playwright.dev/) for testing
-
-### Commands
-
-This `Turborepo` already configured useful commands for all your apps and packages.
-
-#### Build
+### Installation
 
 ```bash
-# Will build all the app & packages with the supported `build` script.
-pnpm run build
+# Clone the repository
+git clone <repository-url>
+cd bond-yield-calculator
 
-# ℹ️ If you plan to only build apps individually,
-# Please make sure you've built the packages first.
+# Install dependencies
+pnpm install
 ```
 
-#### Develop
+## 🏃‍♂️ Running the Application
+
+### Backend (API Server)
 
 ```bash
-# Will run the development server for all the app & packages with the supported `dev` script.
+# Navigate to API directory
+cd apps/api
+
+# Start development server
 pnpm run dev
+
+# API will be available at http://localhost:3000
 ```
 
-#### test
+### Frontend (Web Application)
 
 ```bash
-# Will launch a test suites for all the app & packages with the supported `test` script.
+# Navigate to web directory
+cd apps/web
+
+# Start development server
+pnpm run dev
+
+# Frontend will be available at http://localhost:3001
+```
+
+### Both Applications Simultaneously
+
+```bash
+# From root directory, start both backend and frontend
+pnpm run dev
+
+# This will start:
+# - Backend API at http://localhost:3000
+# - Frontend at http://localhost:3001
+```
+
+## 🧪 Testing
+
+### Backend Tests
+
+```bash
+# Run unit and integration tests
+cd apps/api
 pnpm run test
 
-# You can launch e2e testes with `test:e2e`
+# Run e2e tests
 pnpm run test:e2e
 
-# See `@repo/jest-config` to customize the behavior.
+# Run tests with coverage
+pnpm run test --coverage
 ```
 
-#### Lint
+### Frontend Tests
 
 ```bash
-# Will lint all the app & packages with the supported `lint` script.
-# See `@repo/eslint-config` to customize the behavior.
+# Run e2e tests
+cd apps/web
+pnpm run test:e2e
+
+# Run tests in headed mode (shows browser)
+pnpm run test:e2e --headed
+```
+
+## 🔧 Development Commands
+
+### Building
+
+```bash
+# Build all applications and packages
+pnpm run build
+
+# Build only backend
+pnpm run build --filter=api
+
+# Build only frontend
+pnpm run build --filter=web
+```
+
+### Linting
+
+```bash
+# Lint all projects
 pnpm run lint
+
+# Lint specific project
+pnpm run lint --filter=api
+pnpm run lint --filter=web
 ```
 
-#### Format
+### Type Checking
 
 ```bash
-# Will format all the supported `.ts,.js,json,.tsx,.jsx` files.
-# See `@repo/eslint-config/prettier-base.js` to customize the behavior.
-pnpm format
+# Type check all projects
+pnpm run typecheck
+
+# Type check specific project
+pnpm run typecheck --filter=api
+pnpm run typecheck --filter=web
 ```
 
-### Remote Caching
+## 🌐 API Endpoints
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+### Bond Calculation
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+#### POST /bond/calculate
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+Calculate bond yields and cash flow schedule.
 
-```bash
-npx turbo login
+**Request Body:**
+
+```json
+{
+  "faceValue": 1000,
+  "annualCouponRate": 5,
+  "marketPrice": 950,
+  "yearsToMaturity": 10,
+  "couponFrequency": "annual" | "semi-annual"
+}
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+**Response (200 OK):**
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```bash
-npx turbo link
+```json
+{
+  "currentYield": 5.263,
+  "yieldToMaturity": 5.669,
+  "totalInterestEarned": 500.00,
+  "premiumOrDiscount": "discount",
+  "cashFlowSchedule": [...]
+}
 ```
 
-## Useful Links
+**Error Response (400 Bad Request):**
 
-This example take some inspiration the [with-nextjs](https://github.com/vercel/turborepo/tree/main/examples/with-nextjs) `Turbo` example and [01-cats-app](https://github.com/nestjs/nest/tree/master/sample/01-cats-app) `NestJs` sample.
+```json
+{
+  "message": "Face value must be positive",
+  "error": "Bad Request",
+  "statusCode": 400
+}
+```
 
-Learn more about the power of Turborepo:
+## 🎨 Features
 
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+### Bond Calculator
+
+- **Current Yield Calculation**: Annual coupon payment ÷ Current market price
+- **Yield to Maturity**: Complex calculation using Newton-Raphson method
+- **Cash Flow Schedule**: Payment schedule with cumulative interest
+- **Price Status**: Indicates if bond is at premium, discount, or par
+
+### User Interface
+
+- **Real-time Calculations**: Instant results as you type
+- **Input Validation**: Comprehensive error handling
+- **Dark Mode**: Toggle between light and dark themes
+- **Responsive Design**: Works on desktop and mobile devices
+- **Performance Monitoring**: React Scan integration for optimization
+
+## 🔒 CORS Configuration
+
+The backend is configured to accept requests from:
+
+- `http://localhost:3001` (development)
+- `https://bond-yield-calculator-web.vercel.app/` (production)
+
+## 📦 Technology Stack
+
+### Backend
+
+- **NestJS**: Progressive Node.js framework
+- **TypeScript**: Type-safe JavaScript
+- **Jest**: Testing framework
+- **ESLint**: Code linting
+- **Supertest**: HTTP testing
+
+### Frontend
+
+- **Next.js**: React framework with SSR support
+- **TypeScript**: Type-safe development
+- **Tailwind CSS**: Utility-first CSS framework
+- **Playwright**: E2E testing
+- **React Scan**: Performance monitoring
+
+### DevOps
+
+- **Turborepo**: Monorepo build system
+- **pnpm**: Fast package manager
+- **ESLint + Prettier**: Code quality tools
+- **Husky**: Git hooks for pre-commit checks
+
+## 🚀 Deployment
+
+### Backend Deployment
+
+1. Build the application: `pnpm run build --filter=api`
+2. Deploy to your preferred hosting platform
+3. Ensure environment variables are configured
+
+### Frontend Deployment
+
+1. Build the application: `pnpm run build --filter=web`
+2. Deploy to Vercel, Netlify, or similar platform
+3. Update CORS configuration in backend if needed
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests: `pnpm run test`
+5. Run linting: `pnpm run lint`
+6. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License.
