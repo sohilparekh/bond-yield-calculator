@@ -6,8 +6,7 @@
         "build": {
             "dependsOn": [
                 "@repo/api#build",
-                "@repo/ui#build:styles",
-                "@repo/ui#build:components",
+                "@repo/ui#build",
                 "^build"
             ],
             "outputs": [

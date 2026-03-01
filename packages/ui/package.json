@@ -8,14 +8,16 @@
     "dist"
   ],
   "exports": {
-    "./styles.css": "./dist/index.css",
+    "./styles.css": "./dist/styles.css",
     "./*": "./dist/*.js"
   },
   "scripts": {
-    "build:styles": "tailwindcss -i ./src/styles.css -o ./dist/index.css",
+    "build": "pnpm run build:styles && pnpm run build:components",
+    "build:styles": "tailwindcss -i ./src/styles.css -o ./dist/styles.css",
     "build:components": "tsc",
     "check-types": "tsc --noEmit",
-    "dev:styles": "tailwindcss -i ./src/styles.css -o ./dist/index.css --watch",
+    "dev": "pnpm run dev:styles && pnpm run dev:components",
+    "dev:styles": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --watch",
     "dev:components": "tsc --watch",
     "lint": "eslint . --max-warnings 0 --fix"
   },

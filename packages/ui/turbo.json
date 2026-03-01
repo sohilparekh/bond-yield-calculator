@@ -2,17 +2,9 @@
   "extends": ["//"],
   "tasks": {
     "build": {
-      "dependsOn": ["^build", "build:styles", "build:components"],
+      "dependsOn": ["^build"],
       "outputs": ["dist/**"],
       "inputs": ["$TURBO_DEFAULT$", "src/**/*"]
-    },
-    "build:styles": {
-      "outputs": ["dist/**"],
-      "inputs": ["$TURBO_DEFAULT$", "src/**/*.css", "src/**/*.scss", "tailwind.config.*"]
-    },
-    "build:components": {
-      "outputs": ["dist/**"],
-      "inputs": ["$TURBO_DEFAULT$", "src/**/*.{ts,tsx,js,jsx}"]
     },
     "dev": {
       "cache": false,
